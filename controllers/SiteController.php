@@ -8,6 +8,7 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use app\models\KPA;
 
 class SiteController extends Controller
 {
@@ -92,5 +93,34 @@ class SiteController extends Controller
     public function actionAbout()
     {
         return $this->render('about');
+    }
+
+    public function actionAddkpa()
+    {
+        $model = new KPA();
+
+        if($model->load(Yii::$app->request->post()) && $model->validate()) {
+
+            print_r($model->errors);
+
+            if($model->save()) {
+                Yii::$app->session->setFlash('success', 'KPA has been saved');
+            } else {
+                Yii::$app->session->setFlash('error','There was a problem saving this KPA');
+            }
+
+            return $this->render('addkpa', [
+                'model'=>$model,
+                'added'=>true,
+                ]);
+
+        } else {
+
+        }
+
+        return $this->render("addkpa", [
+                'model' => $model,
+                'added' => false,
+            ]);
     }
 }
