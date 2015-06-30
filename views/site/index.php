@@ -17,8 +17,7 @@ $this->title = 'Community Dashboard';
         </div>
         <div class="row">
             <div class="col-sm-12">
-                <button  class="btn btn-primary">Add a new KPA</button>
-
+                <a href="/web/?r=site/addkpa" class="btn btn-primary">Add a new KPA</a>
             </div>
         </div>
     </div>
