@@ -17,7 +17,7 @@ class KPA extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'kpa';
+        return 'key_performance_area';
     }
 
     /**
@@ -26,8 +26,8 @@ class KPA extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name'], 'string', 'max' => 100],
-            [['name', 'email', 'subject', 'body'], 'required'],
+            [['Title'], 'string', 'max' => 100],
+            [['Title'], 'required'],
         ];
     }
 
@@ -38,7 +38,7 @@ class KPA extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
+            'Title' => 'Title',
         ];
     }
 }

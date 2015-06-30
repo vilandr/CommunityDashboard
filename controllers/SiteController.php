@@ -101,8 +101,6 @@ class SiteController extends Controller
 
         if($model->load(Yii::$app->request->post()) && $model->validate()) {
 
-            print_r($model->errors);
-
             if($model->save()) {
                 Yii::$app->session->setFlash('success', 'KPA has been saved');
             } else {

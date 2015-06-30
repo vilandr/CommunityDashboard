@@ -8,6 +8,7 @@ use yii\bootstrap\ActiveForm;
 
 $this->title = 'Add KPA';
 $this->params['breadcrumbs'][] = $this->title;
+
 ?>
 <div class="">
     <h1><?= Html::encode($this->title) ?></h1>
@@ -21,7 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="row">
         <div class="col-lg-5">
             <?php $form = ActiveForm::begin(['id' => 'addkpa-form']); ?>
-                <?= $form->field($model, 'name') ?>
+                <?= $form->field($model, 'Title') ?>
                 <div class="form-group">
                     <?= Html::submitButton('Submit', ['class' => 'btn btn-primary', 'name' => 'contact-button']) ?>
                 </div>
