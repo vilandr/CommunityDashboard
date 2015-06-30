@@ -27,4 +27,4 @@ phpunit.phar
 /phpunit.xml
 
 #Ignore db config info
-config/db.php
+/config/db.php
