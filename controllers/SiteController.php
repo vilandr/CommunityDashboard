@@ -50,7 +50,14 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
-        return $this->render('index');
+
+        //Reference: http://www.yiiframework.com/doc-2.0/guide-db-active-record.html
+        $kpas = KPA::find()
+            ->all();
+
+        return $this->render('index', [
+                'kpas' => $kpas,
+            ]);
     }
 
     public function actionLogin()
@@ -95,6 +102,17 @@ class SiteController extends Controller
         return $this->render('about');
     }
 
+    /* Controller actions for KPAs
+        @todo: create seperate controller class
+    */
+
+    public function actionViewkpa($id) {
+
+        $kpa = new KPA();
+
+    }
+
+
     public function actionAddkpa()
     {
         $model = new KPA();
@@ -102,17 +120,15 @@ class SiteController extends Controller
         if($model->load(Yii::$app->request->post()) && $model->validate()) {
 
             if($model->save()) {
-                Yii::$app->session->setFlash('success', 'KPA has been saved');
+                Yii::$app->session->setFlash('kpaCreated', 'KPA has been saved');
             } else {
-                Yii::$app->session->setFlash('error','There was a problem saving this KPA');
+                Yii::$app->session->setFlash('kpaCreated','There was a problem saving this KPA');
             }
 
             return $this->render('addkpa', [
                 'model'=>$model,
                 'added'=>true,
                 ]);
-
-        } else {
 
         }
 

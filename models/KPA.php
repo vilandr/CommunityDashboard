@@ -26,8 +26,9 @@ class KPA extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['Title'], 'string', 'max' => 100],
-            [['Title'], 'required'],
+            [['Title'], 'string', 'max' => 200],
+            [['Description'], 'string', 'max' => 500],
+            [['Title','Description'], 'required'],
         ];
     }
 
@@ -39,6 +40,7 @@ class KPA extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'Title' => 'Title',
+            'Description' => 'Description',
         ];
     }
 }
