@@ -13,7 +13,11 @@ $this->title = 'Community Dashboard';
     </div>
 
     <div class="body-content">
-
+        <div class="row">
+            <div class="col-sm-12">
+                <a class="btn btn-primary" href="/web/?=site/addkpa">Add KPA</a>
+            </div>
+        </div>
         <div class="row">
             <?php foreach($kpas as $kpa) { ?>
 
