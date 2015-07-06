@@ -28,7 +28,7 @@ class Goal extends \yii\db\ActiveRecord
         return [
         [['Title'], 'string', 'max' =>200],
         [['Description'], 'string', 'max' => 500],
-        [['Title', 'Description'], 'required'],
+        [['Title', 'Description','KPA_ID'], 'required'],
         ];
      }
     /**

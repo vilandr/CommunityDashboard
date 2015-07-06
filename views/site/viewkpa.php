@@ -16,7 +16,7 @@ $this->title = 'Community Dashboard';
 	<div class="body-content">
 		<div class="row">
 			<div class="col-sm-12">
-				<a class="btn btn-primary" href="/web/?r=site/addgoal">Add Goal</a>
+				<a class="btn btn-primary" href="<?= Url::to(['site/addgoal','kpa_id'=>$kpa->ID]) ?>">Add Goal</a>
 			</div>
 		</div>
         <div class="row">

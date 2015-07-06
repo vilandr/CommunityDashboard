@@ -165,9 +165,11 @@ class SiteController extends Controller
             ]);
     }
 
-    public function actionAddgoal()
+    public function actionAddgoal($kpa_id)
     {
         $model = new Goal();
+
+        $model->KPA_ID=$kpa_id;
 
         if($model->load(Yii::$app->request->post()) && $model->validate()) {
 
@@ -212,22 +214,30 @@ class SiteController extends Controller
                 ]);
         
     }
-    public function actionEditkpa($kpa)
+    public function actionEditkpa($id)
     {
-        if (isset($kpa)) {
-            $kpa = KPA::findOne($kpa);
-        
-        return $this->render('editkpa');
-    } else {
-        return $this->render('viewkpa', [
-            'kpa'=>$kpa,
-            'goals'=>$goals,
+        $kpa = KPA::findOne($id);
+
+        return $this->render('editkpa', [
+            'kpa' => $kpa,
             ]);
     }
-    }
-    public function actionUpdatekpa()
+    public function actionUpdatekpa($id)
     {
 
+        if($model->load(Yii::$app->request->post()) && $model->validate()) {
+
+            if($model->save()) {
+                Yii::$app->session->setFlash('kpaUpdated', 'KPA has been saved');
+            } else {
+                Yii::$app->session->setFlash('kpaUpdated', 'There was a problem saving this KPA');
+            }
+        }
+
+        $kpa = KPA::find($id);
+        $kpa->title = 'Title';
+        $kpa->description = 'Description';
+        $kpa->save();
     }
 
 }

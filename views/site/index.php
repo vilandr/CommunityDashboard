@@ -50,7 +50,7 @@ $this->title = 'Community Dashboard';
                                 <a href="<?= Url::to(['site/viewkpa','id'=>$kpa->ID]) ?>" class="btn btn-info btn-xs">View</a>
                             </li>
                             <li>
-                                <a href="<?= Url::to(['site/editkpa', 'id'=>$kpa->ID]) ?>" class="btn btn-info btn-xs">Edit</a>
+                                <a href="<?= Url::to(['site/editkpa','id'=>$kpa->ID]) ?>" class="btn btn-info btn-xs">Edit</a>
                             </li>
                             <li>
                                 <a href="#" class="btn btn-danger btn-xs">Delete</a>

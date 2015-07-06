@@ -1,14 +1,23 @@
-<div class="editKPA">
-	<h2> Edit <?php echo $kpa->Title?></h2>
-		<form action="<?php echo URL; ?>site/updatekpa" method="POST">
-			<label>Title</label>
-            <input autofocus type="text" name="title" value="<?php echo htmlspecialchars($kpa->Title, ENT_QUOTES, 'UTF-8'); ?>" required />
-            
-            <label>Description</label>
-            <input type="text" name="description" value="<?php echo htmlspecialchars($kpa->Description, ENT_QUOTES, 'UTF-8'); ?>" required />
+<?php
+use yii\helpers\Html;
+use yii\bootstrap\ActiveForm;
+?>
 
-            <input type="hidden" name="id" value="<?php echo htmlspecialchars($kpa->ID, ENT_QUOTES, 'UTF-8'); ?>" />
+<h2>Edit <?php echo $kpa->Title;?></h2>
+    <?php if(Yii::$app->session->hasFlash('kpaUpdated')) : ?>
+        <div class="alert alert-success">
+            Your KPA has been updated!
+        </div>
+    <?php endif; ?>
 
-            <input type="submit" name="submit_edit_kpa" value="Update" />
-        </form>
-</div>
+    <div class="row">
+        <div class="col-lg-5">
+            <?php $form = ActiveForm::begin(['id' => 'update-form']); ?>
+                <?= $form->field($kpa, 'Title') ?>
+                <?= $form->field($kpa, 'Description') ?>
+                <div class="form-group">
+                    <?= Html::submitButton('Submit', ['class' => 'btn btn-primary', 'name' => 'update-button']) ?>
+                </div>
+            <?php ActiveForm::end(); ?>
+        </div>
+    </div>
