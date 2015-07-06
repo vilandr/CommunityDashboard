@@ -6,29 +6,30 @@ use yii\helpers\Url;
 /* @var $this yii\web\View */
 $this->title = 'Community Dashboard';
 ?>
+
+
 <div class="site-index">
-
-    <div class="jumbotron">
-        <h2>Welcome to the Community Dashboard!</h2>
-    </div>
-
-    <div class="body-content">
+	<div class="jumbotron">
+		<h3><?php echo $kpa->Title;?></h4>
+		<p><?php echo $kpa->Description;?></p>
+	</div>
+	<div class="body-content">
+		<div class="row">
+			<div class="col-sm-12">
+				<a class="btn btn-primary" href="/web/?r=site/addgoal">Add Goal</a>
+			</div>
+		</div>
         <div class="row">
-            <div class="col-sm-12">
-                <a class="btn btn-primary" href="/web/?r=site/addkpa">Add KPA</a>
-            </div>
-        </div>
-        <div class="row">
-            <?php foreach($kpas as $kpa) { ?>
+            <?php foreach($goals as $goal) { ?>
 
                 <div class="col-sm-3">
-                    <div class="kpa">
+                    <div class="goal">
                         <h4>
-                            <?= Html::encode($kpa->Title) ?>
+                            <?= Html::encode($goal->Title) ?>
                         </h4>
                         <span>
-                            <?php if(isset($kpa->Description)) {
-                                echo Html::encode($kpa->Description);
+                            <?php if(isset($goal->Description)) {
+                                echo Html::encode($goal->Description);
                             } else {
                                 echo "No Description";
                             }
@@ -36,10 +37,10 @@ $this->title = 'Community Dashboard';
                         </span>
                         <ul>
                             <li>
-                                <b>Goals:</b> 5
+                                <b>KPIs:</b> 5
                             </li>
                             <li>
-                                <b>KPIs:</b> 10
+                                <b>Metrics:</b> 10
                             </li>
                             <li>
                                 <b>Metrics:</b> 15
@@ -47,10 +48,10 @@ $this->title = 'Community Dashboard';
                         </ul>
                         <ul class="ops">
                             <li>
-                                <a href="<?= Url::to(['site/viewkpa','id'=>$kpa->ID]) ?>" class="btn btn-info btn-xs">View</a>
+                                <a href="<?= Url::to(['site/viewgoal','id'=>$goal->ID]) ?>" class="btn btn-info btn-xs">View</a>
                             </li>
                             <li>
-                                <a href="<?= Url::to(['site/editkpa', 'id'=>$kpa->ID]) ?>" class="btn btn-info btn-xs">Edit</a>
+                                <a href="#" class="btn btn-info btn-xs">Edit</a>
                             </li>
                             <li>
                                 <a href="#" class="btn btn-danger btn-xs">Delete</a>

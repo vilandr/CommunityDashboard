@@ -37,6 +37,12 @@ AppAsset::register($this);
             margin: 5px;
             padding: 5px 5px 15px 10px;
         }
+        .goal {
+            border: solid 1px #ccc;
+            border-radius: 15px;
+            margin: 5px;
+            padding: 5px 5px 15px 10px;            
+        }
 
             .kpa h4 {
                 margin: 10px 0px 5px 0;

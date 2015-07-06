@@ -9,6 +9,8 @@ use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\KPA;
+use app\models\Goal;
+use app\models\KPI;
 
 class SiteController extends Controller
 {
@@ -105,11 +107,36 @@ class SiteController extends Controller
     /* Controller actions for KPAs
         @todo: create seperate controller class
     */
+    public function actionViewkpa($id) 
+    {
+        
+        /*$kpa = new KPA($id);*/
+        $kpa = KPA::findOne($id);
+        $goals = Goal::find()
+        ->where(['kpa_id'=>$id])
+        ->all();
+                
+        
+        return $this->render('viewkpa', [
+            'kpa'=>$kpa,
+            'goals'=>$goals,
+            ]);
+    }
 
-    public function actionViewkpa($id) {
-
-        $kpa = new KPA();
-
+    public function actionViewgoal($id) 
+    {
+        
+        /*$kpa = new KPA($id);*/
+        $goal = Goal::findOne($id);
+        $kpis = KPI::find()
+        ->where(['goal_id'=>$id])
+        ->all();
+                
+        
+        return $this->render('viewgoal', [
+            'goal'=>$goal,
+            'kpis'=>$kpis,
+            ]);
     }
 
 
@@ -137,4 +164,80 @@ class SiteController extends Controller
                 'added' => false,
             ]);
     }
+
+    public function actionAddgoal()
+    {
+        $model = new Goal();
+
+        if($model->load(Yii::$app->request->post()) && $model->validate()) {
+
+            if($model->save()) {
+                Yii::$app->session->setFlash('goalCreated', 'Goal has been saved');
+            } else {
+                Yii::$app->session->setFlash('goalCreated', 'There was a problem saving this goal');
+            }
+
+            return $this->render('addgoal', [
+                'model'=>$model,
+                'added'=>true,
+                ]);
+        }
+            return $this->render("addgoal", [
+                'model' => $model,
+                'added' => false,
+                ]);
+        
+    }
+
+    public function actionAddkpi()
+    {
+        $model = new KPI();
+
+        if($model->load(Yii::$app->request->post()) && $model->validate()) {
+
+            if($model->save()) {
+                Yii::$app->session->setFlash('kpiCreated', 'KPI has been saved');
+            } else {
+                Yii::$app->session->setFlash('kpiCreated', 'There was a problem saving this KPI');
+            }
+
+            return $this->render('addkpi', [
+                'model'=>$model,
+                'added'=>true,
+                ]);
+        }
+            return $this->render('addkpi', [
+                'model' => $model,
+                'added' => false,
+                ]);
+        
+    }
+    public function actionEditkpa($kpa)
+    {
+        if (isset($kpa)) {
+            $kpa = KPA::findOne($kpa);
+        
+        return $this->render('editkpa');
+    } else {
+        return $this->render('viewkpa', [
+            'kpa'=>$kpa,
+            'goals'=>$goals,
+            ]);
+    }
+    }
+    public function actionUpdatekpa()
+    {
+
+    }
+
 }
+
+
+
+
+
+
+
+
+
+
