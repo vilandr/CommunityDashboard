@@ -11,6 +11,7 @@ use app\models\ContactForm;
 use app\models\KPA;
 use app\models\Goal;
 use app\models\KPI;
+use app\models\Metrics;
 
 class SiteController extends Controller
 {
@@ -139,6 +140,22 @@ class SiteController extends Controller
             ]);
     }
 
+    public function actionViewkpi($id) 
+    {
+        
+        /*$kpa = new KPA($id);*/
+        $kpi = KPI::findOne($id);
+        $metrics = Metrics::find()
+        ->where(['kpi_id'=>$id])
+        ->all();
+                
+        
+        return $this->render('viewkpi', [
+            'kpi'=>$kpi,
+            'metrics'=>$metrics,
+            ]);
+    }
+
 
     public function actionAddkpa()
     {
@@ -214,31 +231,62 @@ class SiteController extends Controller
                 ]);
         
     }
+    public function actionAddmetric() {
+
+
+    }
     public function actionEditkpa($id)
     {
         $kpa = KPA::findOne($id);
 
+        if($kpa->load(Yii::$app->request->post()) && $kpa->validate()) {
+
+            if($kpa->save()) {
+                Yii::$app->session->setFlash('kpaUpdated', 'KPA has been saved');
+            } else {
+                Yii::$app->session->setFlash('kpaUpdated','There was a problem saving this KPA');
+            }
+
+        } else {
+            //validation failed
+        }
+
         return $this->render('editkpa', [
             'kpa' => $kpa,
-            ]);
+        ]);
     }
+
+
     public function actionUpdatekpa($id)
     {
+
+        $model = KPA::findOne($id);
+        /*$kpa->Title = $title;
+        $kpa->Description = $description;
+        $kpa->save();*/
+
+        print_r($model);
 
         if($model->load(Yii::$app->request->post()) && $model->validate()) {
 
             if($model->save()) {
                 Yii::$app->session->setFlash('kpaUpdated', 'KPA has been saved');
+            return $this->render('viewkpa', [
+                'model'=>$model,
+                'added'=>true,
+                ]);
             } else {
-                Yii::$app->session->setFlash('kpaUpdated', 'There was a problem saving this KPA');
+                Yii::$app->session->setFlash('kpaUpdated','There was a problem saving this KPA');
+
+        return $this->render('viewkpa', [
+                'model' => $model,
+                'added' => false,
+            ]);
             }
+
         }
 
-        $kpa = KPA::find($id);
-        $kpa->title = 'Title';
-        $kpa->description = 'Description';
-        $kpa->save();
-    }
+            }
 
 }
 
