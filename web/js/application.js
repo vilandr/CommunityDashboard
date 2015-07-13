@@ -1,5 +1,4 @@
 $(function() {
-
     var dialog = $("#dialog-form").dialog({
         autoOpen: false,
         height: 300,
@@ -10,20 +9,21 @@ $(function() {
             text: "Delete",
             click: function() {
 
-                    $('#delete-kpa-form').submit();
+                //$('#delete-kpa-form').submit();
+
             }
         },
         {
             text: "Cancel",
             click: function() {
-                document.forms[0].reset();
+                //document.forms[0].reset();
                 $(this).dialog("close");
             }
         }
     ]
     });
 
-    $("#deletekpa").click(function() {
+    $("ul.ops li button").click(function() {
         dialog.dialog("open");
     });
 });

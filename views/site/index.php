@@ -12,8 +12,6 @@ $this->title = 'Community Dashboard';
 
 <div id="dialog-form">
     <form id="delete-kpa-form" method="post">
-            <button id="delete" type="btn" name="delete">Delete</button>
-            <button id="cancel" type="btn" name="cancel">Cancel</button>
     </form>
 </div>
 
