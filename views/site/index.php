@@ -2,46 +2,16 @@
 
 use yii\helpers\Html;
 use yii\helpers\Url;
+use yii\web\View;
+
 
 /* @var $this yii\web\View */
 $this->title = 'Community Dashboard';
+
 ?>
-
-<script>
-$(function() {
-    var dialog = $("#dialog-form").dialog({
-        autoOpen: false,
-        height: 300,
-        width: 350,
-        modal: true,
-        buttons: [
-        {
-            text: "Delete",
-            click: function() {
-
-                    $('#delete-kpa-form').submit();
-            }
-        },
-        {
-            text: "Cancel",
-            click: function() {
-                document.forms[0].reset();
-                $(this).dialog("close");
-            }
-        }
-    ]
-    });
-
-    $("#deletekpa").click(function() {
-        dialog.dialog("open");
-    });
-});
-
-</script>
 
 <div id="dialog-form">
     <form id="delete-kpa-form" method="post">
-        
             <button id="delete" type="btn" name="delete">Delete</button>
             <button id="cancel" type="btn" name="cancel">Cancel</button>
     </form>

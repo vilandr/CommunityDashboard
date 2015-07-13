@@ -20,54 +20,6 @@ AppAsset::register($this);
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 
-    <!-- @TODO: move to CSS -->
-    <style>
-
-        body {
-            font-size: 16px;
-        }
-
-        .row {
-            margin-bottom: 10px;
-        }
-
-        .kpa {
-            border: solid 1px #ccc;
-            border-radius: 15px;
-            margin: 5px;
-            padding: 5px 5px 15px 10px;
-        }
-        .goal {
-            border: solid 1px #ccc;
-            border-radius: 15px;
-            margin: 5px;
-            padding: 5px 5px 15px 10px;            
-        }
-
-            .kpa h4 {
-                margin: 10px 0px 5px 0;
-            }
-
-            .kpa span {
-                font-size: 0.8em;
-            }
-
-            .kpa ul {
-                list-style-type: none;
-                margin: 10px 0 10px 0;
-                padding: 0;
-                font-size: 0.7em;
-            }
-
-                .ops li {
-                    display: inline-block;
-                    height: 20px;
-                }
-
-    </style>
-        <link rel="stylesheet" href="css/jquery-ui.css">
-        <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-        <script src="/web/js/jquery-ui.js"></script>
 </head>
 <body>
 
