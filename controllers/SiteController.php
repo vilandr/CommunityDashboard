@@ -110,8 +110,7 @@ class SiteController extends Controller
     */
     public function actionViewkpa($id) 
     {
-        
-        /*$kpa = new KPA($id);*/
+     
         $kpa = KPA::findOne($id);
         $goals = Goal::find()
         ->where(['kpa_id'=>$id])
@@ -126,8 +125,7 @@ class SiteController extends Controller
 
     public function actionViewgoal($id) 
     {
-        
-        /*$kpa = new KPA($id);*/
+
         $goal = Goal::findOne($id);
         $kpis = KPI::find()
         ->where(['goal_id'=>$id])
@@ -143,7 +141,6 @@ class SiteController extends Controller
     public function actionViewkpi($id) 
     {
         
-        /*$kpa = new KPA($id);*/
         $kpi = KPI::findOne($id);
         $metrics = Metrics::find()
         ->where(['kpi_id'=>$id])
@@ -153,6 +150,17 @@ class SiteController extends Controller
         return $this->render('viewkpi', [
             'kpi'=>$kpi,
             'metrics'=>$metrics,
+            ]);
+    }
+
+    public function actionViewmetric($id) 
+    {
+        
+        
+        $metric = Metrics::findOne($id);
+                
+        return $this->render('viewmetric', [
+            'metric'=>$metric,
             ]);
     }
 
@@ -208,9 +216,11 @@ class SiteController extends Controller
         
     }
 
-    public function actionAddkpi()
+    public function actionAddkpi($goal_id)
     {
         $model = new KPI();
+
+        $model->Goal_ID=$goal_id;
 
         if($model->load(Yii::$app->request->post()) && $model->validate()) {
 
@@ -231,8 +241,29 @@ class SiteController extends Controller
                 ]);
         
     }
-    public function actionAddmetric() {
+    public function actionAddmetric($kpi_id) 
+    {
+        $model = new Metrics();
 
+        $model->KPI_ID=$kpi_id;
+
+        if($model->load(Yii::$app->request->post()) && $model->validate()) {
+
+            if($model->save()) {
+                Yii::$app->session->setFlash('metricCreated', 'Metric has been saved');
+            } else {
+                Yii::$app->session->setFlash('metricCreated', 'There was a problem saving this Metric');
+            }
+
+            return $this->render('addmetric', [
+                'model'=>$model,
+                'added'=>true,
+                ]);
+        }
+            return $this->render('addmetric', [
+                'model' => $model,
+                'added' => false,
+                ]);
 
     }
     public function actionEditkpa($id)
@@ -256,37 +287,75 @@ class SiteController extends Controller
         ]);
     }
 
-
-    public function actionUpdatekpa($id)
+    public function actionEditgoal($id)
     {
+        $goal = Goal::findOne($id);
 
-        $model = KPA::findOne($id);
-        /*$kpa->Title = $title;
-        $kpa->Description = $description;
-        $kpa->save();*/
+        if($goal->load(Yii::$app->request->post()) && $goal->validate()) {
 
-        print_r($model);
-
-        if($model->load(Yii::$app->request->post()) && $model->validate()) {
-
-            if($model->save()) {
-                Yii::$app->session->setFlash('kpaUpdated', 'KPA has been saved');
-            return $this->render('viewkpa', [
-                'model'=>$model,
-                'added'=>true,
-                ]);
+            if($goal->save()) {
+                Yii::$app->session->setFlash('goalUpdated', 'Goal has been saved');
             } else {
-                Yii::$app->session->setFlash('kpaUpdated','There was a problem saving this KPA');
-
-        return $this->render('viewkpa', [
-                'model' => $model,
-                'added' => false,
-            ]);
+                Yii::$app->session->setFlash('goalUpdated','There was a problem saving this Goal');
             }
 
+        } else {
+            //validation failed
         }
 
+        return $this->render('editgoal', [
+            'goal' => $goal,
+        ]);
+    }
+    public function actionEditkpi($id)
+    {
+        $kpi = KPI::findOne($id);
+
+        if($kpi->load(Yii::$app->request->post()) && $kpi->validate()) {
+
+            if($kpi->save()) {
+                Yii::$app->session->setFlash('kpiUpdated', 'KPI has been saved');
+            } else {
+                Yii::$app->session->setFlash('kpiUpdated','There was a problem saving this KPI');
             }
+
+        } else {
+            //validation failed
+        }
+
+        return $this->render('editkpi', [
+            'kpi' => $kpi,
+        ]);
+    }
+
+    public function actionEditmetric($id)
+    {
+        $metric = Metrics::findOne($id);
+
+        if($metric->load(Yii::$app->request->post()) && $metric->validate()) {
+
+            if($metric->save()) {
+                Yii::$app->session->setFlash('metricUpdated', 'Metric has been saved');
+            } else {
+                Yii::$app->session->setFlash('metricUpdated','There was a problem saving this Metric');
+            }
+
+        } else {
+            //validation failed
+        }
+
+        return $this->render('editmetric', [
+            'metric' => $metric,
+        ]);
+    }
+
+
+    public function actionDeletekpa($id) 
+    {
+        if(isset($id)) {
+            $this->model->delete($id);
+        }
+    }
 
 }
 

@@ -65,6 +65,9 @@ AppAsset::register($this);
                 }
 
     </style>
+        <link rel="stylesheet" href="css/jquery-ui.css">
+        <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+        <script src="/web/js/jquery-ui.js"></script>
 </head>
 <body>
 
@@ -108,6 +111,7 @@ AppAsset::register($this);
     </footer>
 
 <?php $this->endBody() ?>
+
 </body>
 </html>
 <?php $this->endPage() ?>

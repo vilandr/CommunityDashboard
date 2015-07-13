@@ -6,6 +6,47 @@ use yii\helpers\Url;
 /* @var $this yii\web\View */
 $this->title = 'Community Dashboard';
 ?>
+
+<script>
+$(function() {
+    var dialog = $("#dialog-form").dialog({
+        autoOpen: false,
+        height: 300,
+        width: 350,
+        modal: true,
+        buttons: [
+        {
+            text: "Delete",
+            click: function() {
+
+                    $('#delete-kpa-form').submit();
+            }
+        },
+        {
+            text: "Cancel",
+            click: function() {
+                document.forms[0].reset();
+                $(this).dialog("close");
+            }
+        }
+    ]
+    });
+
+    $("#deletekpa").click(function() {
+        dialog.dialog("open");
+    });
+});
+
+</script>
+
+<div id="dialog-form">
+    <form id="delete-kpa-form" method="post">
+        
+            <button id="delete" type="btn" name="delete">Delete</button>
+            <button id="cancel" type="btn" name="cancel">Cancel</button>
+    </form>
+</div>
+
 <div class="site-index">
 
     <div class="jumbotron">
@@ -53,7 +94,7 @@ $this->title = 'Community Dashboard';
                                 <a href="<?= Url::to(['site/editkpa','id'=>$kpa->ID]) ?>" class="btn btn-info btn-xs">Edit</a>
                             </li>
                             <li>
-                                <a href="#" class="btn btn-danger btn-xs">Delete</a>
+                                <button id="deletekpa" class="btn" type="button">Delete</button>
                             </li>
                         </ul>
 

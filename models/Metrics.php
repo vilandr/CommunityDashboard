@@ -28,7 +28,7 @@ class Metrics extends \yii\db\ActiveRecord
         return [
         [['Title'], 'string', 'max' =>200],
         [['Description'], 'string', 'max' => 500],
-        [['Title', 'Description'], 'required'],
+        [['Title', 'Description', 'KPI_ID'], 'required'],
         ];
      }
     /**
@@ -40,6 +40,7 @@ class Metrics extends \yii\db\ActiveRecord
             'id' => 'ID',
             'Title' => 'Title',
             'Description' => 'Description',
+            'kpi_id' => 'KPI_ID',
         ];
     }
 }

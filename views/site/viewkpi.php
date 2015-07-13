@@ -51,7 +51,7 @@ $this->title = 'Community Dashboard';
                                 <a href="<?= Url::to(['site/viewmetric','id'=>$metric->ID]) ?>" class="btn btn-info btn-xs">View</a>
                             </li>
                             <li>
-                                <a href="#" class="btn btn-info btn-xs">Edit</a>
+                                <a href="<?= Url::to(['site/editmetric','id'=>$metric->ID]) ?>" class="btn btn-info btn-xs">Edit</a>
                             </li>
                             <li>
                                 <a href="#" class="btn btn-danger btn-xs">Delete</a>

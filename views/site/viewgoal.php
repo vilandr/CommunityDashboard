@@ -16,7 +16,7 @@ $this->title = 'Community Dashboard';
 	<div class="body-content">
 		<div class="row">
 			<div class="col-sm-12">
-				<a class="btn btn-primary" href="/web/?r=site/addkpi">Add KPI</a>
+				<a class="btn btn-primary" href="<?= Url::to(['site/addkpi','goal_id'=>$goal->ID]) ?>">Add KPI</a>
 			</div>
 		</div>
         <div class="row">
@@ -51,7 +51,7 @@ $this->title = 'Community Dashboard';
                                 <a href="<?= Url::to(['site/viewkpi','id'=>$kpi->ID]) ?>" class="btn btn-info btn-xs">View</a>
                             </li>
                             <li>
-                                <a href="#" class="btn btn-info btn-xs">Edit</a>
+                                <a href="<?= Url::to(['site/editkpi','id'=>$kpi->ID]) ?>" class="btn btn-info btn-xs">Edit</a>
                             </li>
                             <li>
                                 <a href="#" class="btn btn-danger btn-xs">Delete</a>
