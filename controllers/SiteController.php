@@ -108,57 +108,57 @@ class SiteController extends Controller
     /* Controller actions for KPAs
         @todo: create seperate controller class
     */
-    public function actionViewkpa($id) 
+    public function actionViewkpa($id)
     {
-     
+
         $kpa = KPA::findOne($id);
         $goals = Goal::find()
         ->where(['kpa_id'=>$id])
         ->all();
-                
-        
+
+
         return $this->render('viewkpa', [
             'kpa'=>$kpa,
             'goals'=>$goals,
             ]);
     }
 
-    public function actionViewgoal($id) 
+    public function actionViewgoal($id)
     {
 
         $goal = Goal::findOne($id);
         $kpis = KPI::find()
         ->where(['goal_id'=>$id])
         ->all();
-                
-        
+
+
         return $this->render('viewgoal', [
             'goal'=>$goal,
             'kpis'=>$kpis,
             ]);
     }
 
-    public function actionViewkpi($id) 
+    public function actionViewkpi($id)
     {
-        
+
         $kpi = KPI::findOne($id);
         $metrics = Metrics::find()
         ->where(['kpi_id'=>$id])
         ->all();
-                
-        
+
+
         return $this->render('viewkpi', [
             'kpi'=>$kpi,
             'metrics'=>$metrics,
             ]);
     }
 
-    public function actionViewmetric($id) 
+    public function actionViewmetric($id)
     {
-        
-        
+
+
         $metric = Metrics::findOne($id);
-                
+
         return $this->render('viewmetric', [
             'metric'=>$metric,
             ]);
@@ -213,7 +213,7 @@ class SiteController extends Controller
                 'model' => $model,
                 'added' => false,
                 ]);
-        
+
     }
 
     public function actionAddkpi($goal_id)
@@ -239,9 +239,9 @@ class SiteController extends Controller
                 'model' => $model,
                 'added' => false,
                 ]);
-        
+
     }
-    public function actionAddmetric($kpi_id) 
+    public function actionAddmetric($kpi_id)
     {
         $model = new Metrics();
 
@@ -350,13 +350,17 @@ class SiteController extends Controller
     }
 
 
-    public function actionDeletekpa($id) 
+    public function actionDeletekpa($id)
     {
-        if(isset($id)) {
-            $this->model->delete($id);
-        }
-    }
+        $kpa = KPA::findOne($id);
 
+        //@todo: make sure to check for a valid object/model
+        if(isset($kpa)) {
+            $kpa->delete($id);
+        }
+
+        Yii::$app->response->redirect(array('/site/index'));
+    }
 }
 
 

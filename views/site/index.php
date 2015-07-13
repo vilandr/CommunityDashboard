@@ -11,8 +11,7 @@ $this->title = 'Community Dashboard';
 ?>
 
 <div id="dialog-form">
-    <form id="delete-kpa-form" method="post">
-    </form>
+    <p>Are you sure you want to delete his KPA? This action can not be undone.
 </div>
 
 <div class="site-index">
@@ -62,7 +61,7 @@ $this->title = 'Community Dashboard';
                                 <a href="<?= Url::to(['site/editkpa','id'=>$kpa->ID]) ?>" class="btn btn-info btn-xs">Edit</a>
                             </li>
                             <li>
-                                <button id="deletekpa" class="btn" type="button">Delete</button>
+                                <button id="deletekpa" class="btn" type="button" onclick="deleteDialog(<?= $kpa->ID; ?>)">Delete</button>
                             </li>
                         </ul>
 

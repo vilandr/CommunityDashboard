@@ -1,4 +1,10 @@
+//variable for function
+var deleteDialog;
+
 $(function() {
+
+    var delete_id = 0;
+
     var dialog = $("#dialog-form").dialog({
         autoOpen: false,
         height: 300,
@@ -8,22 +14,21 @@ $(function() {
         {
             text: "Delete",
             click: function() {
-
-                //$('#delete-kpa-form').submit();
-
+                window.location.href = "/web/index.php?r=site%2Fdeletekpa&id=" + delete_id;
             }
         },
         {
             text: "Cancel",
             click: function() {
-                //document.forms[0].reset();
                 $(this).dialog("close");
             }
         }
     ]
     });
 
-    $("ul.ops li button").click(function() {
+    deleteDialog = function(id) {
+        delete_id = id;
         dialog.dialog("open");
-    });
+    }
 });
+
