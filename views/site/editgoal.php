@@ -20,6 +20,7 @@ use yii\bootstrap\ActiveForm;
             <?php $form = ActiveForm::begin(['id' => 'updategoal-form']); ?>
                 <?= $form->field($goal, 'Title') ?>
                 <?= $form->field($goal, 'Description')->textArea(['rows'=>6]) ?>
+                <?= $form->field($goal, 'Weight') ?>
                 <div class="form-group">
                     <?= Html::submitButton('Update', ['class' => 'btn btn-primary', 'name' => 'update-button']) ?>
                 </div>

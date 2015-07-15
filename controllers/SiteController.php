@@ -59,7 +59,7 @@ class SiteController extends Controller
             ->all();
 
         return $this->render('index', [
-                'kpas' => $kpas,
+                'kpas' =>$kpas,
             ]);
     }
 
@@ -146,7 +146,6 @@ class SiteController extends Controller
         ->where(['kpi_id'=>$id])
         ->all();
 
-
         return $this->render('viewkpi', [
             'kpi'=>$kpi,
             'metrics'=>$metrics,
@@ -159,8 +158,11 @@ class SiteController extends Controller
 
         $metric = Metrics::findOne($id);
 
+        $progress = $metrics->calculateProgress();
+
         return $this->render('viewmetric', [
             'metric'=>$metric,
+            'progress'=>$progress,
             ]);
     }
 
@@ -360,6 +362,39 @@ class SiteController extends Controller
         }
 
         Yii::$app->response->redirect(array('/site/index'));
+    }
+    public function actionDeletegoal($id)
+    {
+        $goal = Goal::findOne($id);
+
+        //@todo: make sure to check for a valid object/model
+        if(isset($goal)) {
+            $goal->delete($id);
+        }
+
+        Yii::$app->response->redirect(array('/site/viewkpa'));
+    }
+    public function actionDeletekpi($id)
+    {
+        $kpi = KPI::findOne($id);
+
+        //@todo: make sure to check for a valid object/model
+        if(isset($kpi)) {
+            $kpi->delete($id);
+        }
+
+        Yii::$app->response->redirect(array('/site/viewgoal'));
+    }
+    public function actionDeletemetric($metric_id, $kpi_id)
+    {
+        $metric = Metrics::findOne($metric_id);
+
+        //@todo: make sure to check for a valid object/model
+        if(isset($metric)) {
+            $metric->delete($metric_id);
+        }
+
+        Yii::$app->response->redirect(array('/site/viewkpi','id'=>$kpi_id));
     }
 }
 

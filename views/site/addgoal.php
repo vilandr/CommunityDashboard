@@ -24,6 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <?php $form = ActiveForm::begin(['id' => 'addgoal-form']); ?>
                 <?= $form->field($model, 'Title') ?>
                 <?= $form->field($model, 'Description')->textArea(['rows'=>6]) ?>
+                <?= $form->field($model, 'Weight') ?>
                 <div class="form-group">
                     <?= Html::submitButton('Create Goal', ['class' => 'btn btn-primary', 'name' => 'contact-button']) ?>
                 </div>

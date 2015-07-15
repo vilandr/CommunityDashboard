@@ -24,6 +24,9 @@ $this->params['breadcrumbs'][] = $this->title;
             <?php $form = ActiveForm::begin(['id' => 'addmetric-form']); ?>
                 <?= $form->field($model, 'Title') ?>
                 <?= $form->field($model, 'Description')->textArea(['rows'=>6]) ?>
+                <?= $form->field($model, 'Weight') ?>
+                <?= $form->field($model, 'Current') ?>
+                <?= $form->field($model, 'Target') ?>
                 <div class="form-group">
                     <?= Html::submitButton('Create Metric', ['class' => 'btn btn-primary', 'name' => 'contact-button']) ?>
                 </div>

@@ -10,8 +10,10 @@ $this->title = 'Community Dashboard';
 
 ?>
 
-<div id="dialog-form">
-    <p>Are you sure you want to delete his KPA? This action can not be undone.
+<div id="kpadialog-form">
+    
+<p>Are you sure you want to delete this KPA and all of the contents that belong to it? This action can not be undone!</p>
+
 </div>
 
 <div class="site-index">
@@ -42,6 +44,11 @@ $this->title = 'Community Dashboard';
                             }
                             ?>
                         </span>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="" aria-valuemin="0" aria-valuemax="100" style="width: 20%;">
+                                80%
+                            </div>
+                        </div>
                         <ul>
                             <li>
                                 <b>Goals:</b> 5
@@ -55,13 +62,13 @@ $this->title = 'Community Dashboard';
                         </ul>
                         <ul class="ops">
                             <li>
-                                <a href="<?= Url::to(['site/viewkpa','id'=>$kpa->ID]) ?>" class="btn btn-info btn-xs">View</a>
+                                <a href="<?= Url::to(['site/viewkpa','id'=>$kpa->ID]) ?>" class="btn btn-info btn-md">View</a>
                             </li>
                             <li>
-                                <a href="<?= Url::to(['site/editkpa','id'=>$kpa->ID]) ?>" class="btn btn-info btn-xs">Edit</a>
+                                <a href="<?= Url::to(['site/editkpa','id'=>$kpa->ID]) ?>" class="btn btn-info btn-md">Edit</a>
                             </li>
                             <li>
-                                <button id="deletekpa" class="btn" type="button" onclick="deleteDialog(<?= $kpa->ID; ?>)">Delete</button>
+                                <button id="deletekpa" class="btn btn-danger btn-xs" type="button" onclick="kpaDeleteDialog(<?= $kpa->ID; ?>)">Delete</button>
                             </li>
                         </ul>
 

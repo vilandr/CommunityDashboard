@@ -28,7 +28,7 @@ class Goal extends \yii\db\ActiveRecord
         return [
         [['Title'], 'string', 'max' =>200],
         [['Description'], 'string', 'max' => 500],
-        [['Title', 'Description','KPA_ID'], 'required'],
+        [['Title', 'Description','KPA_ID', 'Weight'], 'required'],
         ];
      }
     /**
@@ -41,6 +41,8 @@ class Goal extends \yii\db\ActiveRecord
             'Title' => 'Title',
             'Description' => 'Description',
             'kpa_id' => 'KPA_ID',
+            'Weight' => 'Weight',
         ];
     }
+
 }

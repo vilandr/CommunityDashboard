@@ -20,6 +20,9 @@ use yii\bootstrap\ActiveForm;
             <?php $form = ActiveForm::begin(['id' => 'updatemetric-form']); ?>
                 <?= $form->field($metric, 'Title') ?>
                 <?= $form->field($metric, 'Description')->textArea(['rows'=>6]) ?>
+                <?= $form->field($metric, 'Weight') ?>
+                <?= $form->field($metric, 'Current') ?>
+                <?= $form->field($metric, 'Target') ?>
                 <div class="form-group">
                     <?= Html::submitButton('Update', ['class' => 'btn btn-primary', 'name' => 'update-button']) ?>
                 </div>

@@ -28,7 +28,7 @@ class KPI extends \yii\db\ActiveRecord
         return [
         [['Title'], 'string', 'max' =>200],
         [['Description'], 'string', 'max' => 500],
-        [['Title', 'Description', 'Goal_ID'], 'required'],
+        [['Title', 'Description', 'Goal_ID', 'Weight'], 'required'],
         ];
      }
     /**
@@ -41,6 +41,14 @@ class KPI extends \yii\db\ActiveRecord
             'Title' => 'Title',
             'Description' => 'Description',
             'goal_id' => 'Goal_ID',
+            'Weight' => 'Weight',
         ];
     }
+    public function calculateProgress() {
+        
+
+
+        return 80;
+    }
+
 }

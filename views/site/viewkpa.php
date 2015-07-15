@@ -2,11 +2,20 @@
 
 use yii\helpers\Html;
 use yii\helpers\Url;
-
+use yii\web\View;
 /* @var $this yii\web\View */
 $this->title = 'Community Dashboard';
 ?>
+<div id="goaldialog-form">
+    
+<p>Are you sure you want to delete this Goal and all of the contents that belong to it? This action can not be undone!</p>
 
+</div>
+
+<ol class="breadcrumb">
+  <li><a href="/web/?r=site/index">Home</a></li>
+  <li class="active"> <?php echo $kpa->Title;?> </a></li>
+</ol>
 
 <div class="site-index">
 	<div class="jumbotron">
@@ -27,14 +36,24 @@ $this->title = 'Community Dashboard';
                         <h4>
                             <?= Html::encode($goal->Title) ?>
                         </h4>
-                        <span>
+                        <p>
                             <?php if(isset($goal->Description)) {
                                 echo Html::encode($goal->Description);
                             } else {
                                 echo "No Description";
                             }
                             ?>
-                        </span>
+                        </p>
+                        <p>
+
+                        Goal Weight: <?php 
+                            if(isset($goal->Weight)) {
+                                echo Html::encode($goal->Weight);
+                            } else {
+                                echo "No Weight Set";
+                            }
+                            ?>
+                        </p>
                         <ul>
                             <li>
                                 <b>KPIs:</b> 5
@@ -48,13 +67,13 @@ $this->title = 'Community Dashboard';
                         </ul>
                         <ul class="ops">
                             <li>
-                                <a href="<?= Url::to(['site/viewgoal','id'=>$goal->ID]) ?>" class="btn btn-info btn-xs">View</a>
+                                <a href="<?= Url::to(['site/viewgoal','id'=>$goal->ID]) ?>" class="btn btn-info btn-md">View</a>
                             </li>
                             <li>
-                                <a href="<?= Url::to(['site/editgoal','id'=>$goal->ID]) ?>" class="btn btn-info btn-xs">Edit</a>
+                                <a href="<?= Url::to(['site/editgoal','id'=>$goal->ID]) ?>" class="btn btn-info btn-md">Edit</a>
                             </li>
                             <li>
-                                <a href="#" class="btn btn-danger btn-xs">Delete</a>
+                                <button id="deletegoal" class="btn btn-danger btn-xs" type="button" onclick="goalDeleteDialog(<?= $goal->ID; ?>)">Delete</button>
                             </li>
                         </ul>
 

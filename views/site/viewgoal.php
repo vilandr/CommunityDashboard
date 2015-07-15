@@ -2,16 +2,26 @@
 
 use yii\helpers\Html;
 use yii\helpers\Url;
-
+use yii\web\View;
 /* @var $this yii\web\View */
 $this->title = 'Community Dashboard';
-?>
 
+?>
+<div id="kpidialog-form">
+    
+<p>Are you sure you want to delete this KPI and all of the contents that belong to it? This action can not be undone!</p>
+
+</div>
+<ol class="breadcrumb">
+  <li><a href="/web/?r=site/index">Home</a></li>
+  <li class="active"> <?php echo $goal->Title;?> </a></li>
+</ol>
 
 <div class="site-index">
 	<div class="jumbotron">
 		<h3><?php echo $goal->Title;?></h4>
 		<p><?php echo $goal->Description;?></p>
+        <p>Goal Weight: <?php echo $goal->Weight;?></p>
 	</div>
 	<div class="body-content">
 		<div class="row">
@@ -27,14 +37,23 @@ $this->title = 'Community Dashboard';
                         <h4>
                             <?= Html::encode($kpi->Title); ?>
                         </h4>
-                        <span>
+                        <p>
                             <?php if(isset($kpi->Description)) {
                                 echo Html::encode($kpi->Description);
                             } else {
                                 echo "No Description";
                             }
                             ?>
-                        </span>
+                        </p>
+                        <p>
+                        KPI Weight: <?php 
+                            if(isset($kpi->Weight)) {
+                                echo Html::encode($kpi->Weight);
+                            } else {
+                                echo "No Weight Set";
+                            }
+                            ?>
+                        </p>
                         <ul>
                             <li>
                                 <b>KPIs:</b> 5
@@ -48,13 +67,13 @@ $this->title = 'Community Dashboard';
                         </ul>
                         <ul class="ops">
                             <li>
-                                <a href="<?= Url::to(['site/viewkpi','id'=>$kpi->ID]) ?>" class="btn btn-info btn-xs">View</a>
+                                <a href="<?= Url::to(['site/viewkpi','id'=>$kpi->ID]) ?>" class="btn btn-info btn-md">View</a>
                             </li>
                             <li>
-                                <a href="<?= Url::to(['site/editkpi','id'=>$kpi->ID]) ?>" class="btn btn-info btn-xs">Edit</a>
+                                <a href="<?= Url::to(['site/editkpi','id'=>$kpi->ID]) ?>" class="btn btn-info btn-md">Edit</a>
                             </li>
                             <li>
-                                <a href="#" class="btn btn-danger btn-xs">Delete</a>
+                                <button id="deletekpi" class="btn btn-danger btn-xs" type="button" onclick="kpiDeleteDialog(<?= $kpi->ID; ?>)">Delete</button>
                             </li>
                         </ul>
 

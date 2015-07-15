@@ -43,4 +43,5 @@ class KPA extends \yii\db\ActiveRecord
             'Description' => 'Description',
         ];
     }
+
 }
