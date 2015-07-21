@@ -111,6 +111,7 @@ class SiteController extends Controller
     public function actionViewkpa($id)
     {
 
+
         $kpa = KPA::findOne($id);
         $goals = Goal::find()
         ->where(['kpa_id'=>$id])
@@ -126,6 +127,7 @@ class SiteController extends Controller
     public function actionViewgoal($id)
     {
 
+
         $goal = Goal::findOne($id);
         $kpis = KPI::find()
         ->where(['goal_id'=>$id])
@@ -140,6 +142,7 @@ class SiteController extends Controller
 
     public function actionViewkpi($id)
     {
+
 
         $kpi = KPI::findOne($id);
         $metrics = Metrics::find()
@@ -169,6 +172,9 @@ class SiteController extends Controller
         $model = new KPA();
 
         if($model->load(Yii::$app->request->post()) && $model->validate()) {
+
+            //@todo: add user id
+            // Yii::$app->user->identity->ID
 
             if($model->save()) {
                 Yii::$app->session->setFlash('kpaCreated', 'KPA has been saved');
@@ -291,6 +297,7 @@ class SiteController extends Controller
         $goal = Goal::findOne($id);
 
         if($goal->load(Yii::$app->request->post()) && $goal->validate()) {
+
 
             if($goal->save()) {
                 Yii::$app->session->setFlash('goalUpdated', 'Goal has been saved');
