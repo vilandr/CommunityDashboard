@@ -10,7 +10,7 @@ $this->title = 'Community Dashboard';
 
 ?>
 
-<div id="kpadialog-form">
+<div class="deleteDialog" id="kpadialog-form">
     
 <p>Are you sure you want to delete this KPA and all of the contents that belong to it? This action can not be undone!</p>
 
@@ -45,7 +45,7 @@ $this->title = 'Community Dashboard';
                             ?>
                         </span>
                         <div class="progress">
-                            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="" aria-valuemin="0" aria-valuemax="100" style="width: 20%;">
+                            <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="" aria-valuemin="0" aria-valuemax="100" style="width: 20%;">
                                 80%
                             </div>
                         </div>

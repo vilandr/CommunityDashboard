@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?php if(Yii::$app->session->hasFlash('metricCreated')) : ?>
         <div class="alert alert-success">
-            Your Key Performance Indicator has been created!
+            Your Metric has been created!
         </div>
     <?php endif; ?>
 

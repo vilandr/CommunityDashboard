@@ -158,11 +158,8 @@ class SiteController extends Controller
 
         $metric = Metrics::findOne($id);
 
-        $progress = $metrics->calculateProgress();
-
         return $this->render('viewmetric', [
             'metric'=>$metric,
-            'progress'=>$progress,
             ]);
     }
 

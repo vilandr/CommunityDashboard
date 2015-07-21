@@ -8,8 +8,8 @@ body {
     height: auto;
     margin: 0 auto -60px;
     padding: 0 0 60px;
-    background-color: beige;
-    /*background-image: url(background-img.jpg);
+    background-color: white;
+/*    background-image: url(232.jpg);
     background-repeat: no-repeat;
     background-size: 100%;*/
 }
@@ -114,6 +114,18 @@ a.desc:after {
             margin: 5px;
             padding: 5px 5px 15px 10px;
         }
+        .kpi {
+            border: solid 1px #ccc;
+            border-radius: 15px;
+            margin: 5px;
+            padding: 5px 5px 15px 10px;
+        }
+        .metric {
+            border: solid 1px #ccc;
+            border-radius: 15px;
+            margin: 5px;
+            padding: 5px 5px 15px 10px;
+        }
 
             .kpa h4 {
                 margin: 10px 0px 5px 0;
@@ -134,4 +146,7 @@ a.desc:after {
                     display: inline-block;
                     height: 20px;
                 }
+            .deleteDialog {
+                display: none;
+            }
 

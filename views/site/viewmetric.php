@@ -19,7 +19,7 @@ $this->title = 'Community Dashboard';
         <p>Metric Weight: <?php echo $metric->Weight;?></p>
         <span>Metric Current Score: <?php echo $metric->Current;?></span>
         <span>Metric Target Score: <?php echo $metric->Target;?></span>
-        <p>Progress: <?php echo $progress ?>% to our goal</p>
+        <p>Progress: </p>
     </div>
 
     <div class="body-content">

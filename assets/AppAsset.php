@@ -24,6 +24,9 @@ class AppAsset extends AssetBundle
     public $js = [
         'js/jquery-ui.js',
         'js/application.js',
+        'http://code.highcharts.com/highcharts.js',
+        'http://code.highcharts.com/highcharts-more.js',
+        'http://code.highcharts.com/modules/solid-gauge.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',

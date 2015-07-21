@@ -3,11 +3,12 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\web\View;
+use app\models\Metrics;
 /* @var $this yii\web\View */
 $this->title = 'Community Dashboard';
 
 ?>
-<div id="metricdialog-form">
+<div class="deleteDialog" id="metricdialog-form">
     
 <p>Are you sure you want to delete this Metric and all of the contents that belong to it? This action can not be undone!</p>
 
@@ -21,7 +22,8 @@ $this->title = 'Community Dashboard';
     <div class="jumbotron">
         <h3><?php echo $kpi->Title;?></h4>
         <p><?php echo $kpi->Description;?></p>
-        <p>KPI Weight: <?php echo $kpi->Weight;?></p>
+        <p>KPI Weight: <?php echo $kpi->Weight;?>%</p>
+        <p>KPI Overall Score: </p>
     </div>
     <div class="body-content">
         <div class="row">
@@ -33,7 +35,7 @@ $this->title = 'Community Dashboard';
             <?php foreach($metrics as $metric) { ?>
 
                 <div class="col-sm-3">
-                    <div class="kpi">
+                    <div class="metric">
                         <h4>
                             <?= Html::encode($metric->Title) ?>
                         </h4>
@@ -47,12 +49,8 @@ $this->title = 'Community Dashboard';
                         </p>
                         <p>
                         Metric Weight: <?php 
-                            if(isset($metric->Weight)) {
-                                echo Html::encode($metric->Weight);
-                            } else {
-                                echo "No Weight Set";
-                            }
-                            ?>
+                            echo $metric->Weight;
+                            ?>%
                         </p>
                         <p> Current Score:<?php
                             if(isset($metric->Current)) {
@@ -69,6 +67,15 @@ $this->title = 'Community Dashboard';
                                 echo "No Target Score set";
                             }
                             ?>
+                        </p>
+                        <p>
+                            Percentage:
+                            
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-<?= $metric->progressStatus() ?>" role="progressbar" aria-valuenow="" aria-valuemin="0" aria-valuemax="100" style="width: <?= ($metric->calculateProgressWidth() * 100);?>%;">
+                                <?php $metric->calculateProgressPercent()?>
+                            </div>
+                        </div>
                         </p>
                         <ul class="ops">
                             <li>

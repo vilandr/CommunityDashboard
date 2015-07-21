@@ -6,7 +6,7 @@ use yii\web\View;
 /* @var $this yii\web\View */
 $this->title = 'Community Dashboard';
 ?>
-<div id="goaldialog-form">
+<div class="deleteDialog" id="goaldialog-form">
     
 <p>Are you sure you want to delete this Goal and all of the contents that belong to it? This action can not be undone!</p>
 
@@ -19,8 +19,11 @@ $this->title = 'Community Dashboard';
 
 <div class="site-index">
 	<div class="jumbotron">
+        <hr>
 		<h3><?php echo $kpa->Title;?></h4>
+        <hr>
 		<p><?php echo $kpa->Description;?></p>
+        <hr>
 	</div>
 	<div class="body-content">
 		<div class="row">

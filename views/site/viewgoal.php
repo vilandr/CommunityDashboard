@@ -7,7 +7,7 @@ use yii\web\View;
 $this->title = 'Community Dashboard';
 
 ?>
-<div id="kpidialog-form">
+<div class="deleteDialog" id="kpidialog-form">
     
 <p>Are you sure you want to delete this KPI and all of the contents that belong to it? This action can not be undone!</p>
 

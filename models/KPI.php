@@ -44,11 +44,14 @@ class KPI extends \yii\db\ActiveRecord
             'Weight' => 'Weight',
         ];
     }
-    public function calculateProgress() {
+    /*public function overallScore() {
         
-
-
-        return 80;
-    }
+        $total = 0;
+        $addToTotal;
+        foreach ($metrics as $metric) {
+            $addToTotal = ($metric->Weight * $metric->calculateProgressPercent()) / 10000;
+            return $total += $addToTotal;
+        }
+        }*/
 
 }
