@@ -2,15 +2,17 @@
 
 namespace app\models;
 
-class User extends \yii\base\Object implements \yii\web\IdentityInterface
+use yii\db\ActiveRecord;
+
+class User extends ActiveRecord implements \yii\web\IdentityInterface
 {
-    public $id;
+    /*public $id;
     public $username;
     public $password;
     public $authKey;
-    public $accessToken;
+    public $accessToken;*/
 
-    private static $users = [
+    /*private static $users = [
         '100' => [
             'id' => '100',
             'username' => 'admin',
@@ -25,14 +27,31 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
             'authKey' => 'test101key',
             'accessToken' => '101-token',
         ],
-    ];
+    ];*/
+
+    /**
+     * @inheritdoc
+    */
+    public static function tableName()
+    {
+        return 'user';
+    }
 
     /**
      * @inheritdoc
      */
     public static function findIdentity($id)
     {
-        return isset(self::$users[$id]) ? new static(self::$users[$id]) : null;
+        //return isset(self::$users[$id]) ? new static(self::$users[$id]) : null;
+        $user = self::find()
+                ->where([
+                    "id" => $id
+                ])
+                ->one();
+        if (!count($user)) {
+            return null;
+        }
+        return new static($user);
     }
 
     /**
@@ -57,11 +76,19 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
      */
     public static function findByUsername($username)
     {
-        foreach (self::$users as $user) {
+        /*foreach (self::$users as $user) {
             if (strcasecmp($user['username'], $username) === 0) {
                 return new static($user);
             }
-        }
+        }*/
+
+        $user = self::find()
+            ->where(['Username'=>$username])
+            ->one();
+
+        if(count($user) == 1)
+            return $user;
+
 
         return null;
     }
@@ -71,7 +98,7 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
      */
     public function getId()
     {
-        return $this->id;
+        return $this->ID;
     }
 
     /**
@@ -79,7 +106,7 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
      */
     public function getAuthKey()
     {
-        return $this->authKey;
+        return null;
     }
 
     /**
@@ -87,7 +114,7 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
      */
     public function validateAuthKey($authKey)
     {
-        return $this->authKey === $authKey;
+        return null; //$this->authKey === $authKey;
     }
 
     /**
@@ -98,6 +125,6 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
      */
     public function validatePassword($password)
     {
-        return $this->password === $password;
+        return $this->Password === $password;
     }
 }

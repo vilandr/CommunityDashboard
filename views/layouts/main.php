@@ -41,7 +41,7 @@ AppAsset::register($this);
             border: solid 1px #ccc;
             border-radius: 15px;
             margin: 5px;
-            padding: 5px 5px 15px 10px;            
+            padding: 5px 5px 15px 10px;
         }
 
             .kpa h4 {
@@ -84,7 +84,7 @@ AppAsset::register($this);
                     ['label' => 'Home', 'url' => ['/site/index']],
                     Yii::$app->user->isGuest ?
                         ['label' => 'Login', 'url' => ['/site/login']] :
-                        ['label' => 'Logout (' . Yii::$app->user->identity->username . ')',
+                        ['label' => 'Logout (' . Yii::$app->user->identity->Username . ')',
                             'url' => ['/site/logout'],
                             'linkOptions' => ['data-method' => 'post']],
                 ],
