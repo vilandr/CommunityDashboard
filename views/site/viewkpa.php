@@ -7,7 +7,7 @@ use yii\web\View;
 $this->title = 'Community Dashboard';
 ?>
 <div class="deleteDialog" id="goaldialog-form">
-    
+    <span class="glyphicon glyphicon-exclamation-sign"></span>
 <p>Are you sure you want to delete this Goal and all of the contents that belong to it? This action can not be undone!</p>
 
 </div>
@@ -19,16 +19,16 @@ $this->title = 'Community Dashboard';
 
 <div class="site-index">
 	<div class="jumbotron">
-        <hr>
-		<h3><?php echo $kpa->Title;?></h4>
-        <hr>
+        
+		<h2><?php echo $kpa->Title;?></h2>
+        
 		<p><?php echo $kpa->Description;?></p>
-        <hr>
+        
 	</div>
 	<div class="body-content">
 		<div class="row">
 			<div class="col-sm-12">
-				<a class="btn btn-primary" href="<?= Url::to(['site/addgoal','kpa_id'=>$kpa->ID]) ?>">Add Goal</a>
+				<a class="btn btn-primary" href="<?= Url::to(['site/addgoal','kpa_id'=>$kpa->ID]) ?>"><span class="glyphicon glyphicon-plus-sign"></span> Add Goal</a>
 			</div>
 		</div>
         <div class="row">

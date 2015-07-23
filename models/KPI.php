@@ -50,7 +50,7 @@ class KPI extends \yii\db\ActiveRecord
         $addToTotal;
         foreach ($metrics as $metric) {
             $addToTotal = ($metric->Weight * $metric->calculateProgressPercent()) / 10000;
-            return $total += $addToTotal;
+            $total += $addToTotal;
         }
         }*/
 

@@ -9,7 +9,7 @@ $this->title = 'Community Dashboard';
 
 ?>
 <div class="deleteDialog" id="metricdialog-form">
-    
+    <span class="glyphicon glyphicon-exclamation-sign"></span>
 <p>Are you sure you want to delete this Metric and all of the contents that belong to it? This action can not be undone!</p>
 
 </div>
@@ -28,7 +28,7 @@ $this->title = 'Community Dashboard';
     <div class="body-content">
         <div class="row">
             <div class="col-sm-12">
-                <a class="btn btn-primary" href="<?= Url::to(['site/addmetric','kpi_id'=>$kpi->ID]) ?>">Add Metric</a>
+                <a class="btn btn-primary" href="<?= Url::to(['site/addmetric','kpi_id'=>$kpi->ID]) ?>"><span class="glyphicon glyphicon-plus-sign"></span> Add Metric</a>
             </div>
         </div>
         <div class="row">

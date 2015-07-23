@@ -175,6 +175,7 @@ class SiteController extends Controller
 
             //@todo: add user id
             // Yii::$app->user->identity->ID
+            $model->User_ID = Yii::$app->user->identity->ID;
 
             if($model->save()) {
                 Yii::$app->session->setFlash('kpaCreated', 'KPA has been saved');

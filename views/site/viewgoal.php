@@ -8,7 +8,7 @@ $this->title = 'Community Dashboard';
 
 ?>
 <div class="deleteDialog" id="kpidialog-form">
-    
+    <span class="glyphicon glyphicon-exclamation-sign"></span>
 <p>Are you sure you want to delete this KPI and all of the contents that belong to it? This action can not be undone!</p>
 
 </div>
@@ -26,7 +26,7 @@ $this->title = 'Community Dashboard';
 	<div class="body-content">
 		<div class="row">
 			<div class="col-sm-12">
-				<a class="btn btn-primary" href="<?= Url::to(['site/addkpi','goal_id'=>$goal->ID]) ?>">Add KPI</a>
+				<a class="btn btn-primary" href="<?= Url::to(['site/addkpi','goal_id'=>$goal->ID]) ?>"><span class="glyphicon glyphicon-plus-sign"></span> Add KPI</a>
 			</div>
 		</div>
         <div class="row">

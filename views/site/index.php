@@ -11,7 +11,7 @@ $this->title = 'Community Dashboard';
 ?>
 
 <div class="deleteDialog" id="kpadialog-form">
-    
+    <span class="glyphicon glyphicon-exclamation-sign"></span>
 <p>Are you sure you want to delete this KPA and all of the contents that belong to it? This action can not be undone!</p>
 
 </div>
@@ -25,7 +25,7 @@ $this->title = 'Community Dashboard';
     <div class="body-content">
         <div class="row">
             <div class="col-sm-12">
-                <a class="btn btn-primary" href="/web/?r=site/addkpa">Add KPA</a>
+                <a class="btn btn-primary" href="/web/?r=site/addkpa"><span class="glyphicon glyphicon-plus-sign"></span> Add KPA</a>
             </div>
         </div>
         <div class="row">
@@ -46,7 +46,7 @@ $this->title = 'Community Dashboard';
                         </span>
                         <div class="progress">
                             <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="" aria-valuemin="0" aria-valuemax="100" style="width: 20%;">
-                                80%
+                                20%
                             </div>
                         </div>
                         <ul>
