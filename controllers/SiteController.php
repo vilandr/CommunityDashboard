@@ -174,7 +174,6 @@ class SiteController extends Controller
         if($model->load(Yii::$app->request->post()) && $model->validate()) {
 
             //@todo: add user id
-            // Yii::$app->user->identity->ID
             $model->User_ID = Yii::$app->user->identity->ID;
 
             if($model->save()) {
@@ -204,6 +203,8 @@ class SiteController extends Controller
 
         if($model->load(Yii::$app->request->post()) && $model->validate()) {
 
+            $model->User_ID = Yii::$app->user->identity->ID;
+
             if($model->save()) {
                 Yii::$app->session->setFlash('goalCreated', 'Goal has been saved');
             } else {
@@ -230,6 +231,8 @@ class SiteController extends Controller
 
         if($model->load(Yii::$app->request->post()) && $model->validate()) {
 
+            $model->User_ID = Yii::$app->user->identity->ID;
+
             if($model->save()) {
                 Yii::$app->session->setFlash('kpiCreated', 'KPI has been saved');
             } else {
@@ -254,6 +257,8 @@ class SiteController extends Controller
         $model->KPI_ID=$kpi_id;
 
         if($model->load(Yii::$app->request->post()) && $model->validate()) {
+
+            $model->User_ID = Yii::$app->user->identity->ID;
 
             if($model->save()) {
                 Yii::$app->session->setFlash('metricCreated', 'Metric has been saved');

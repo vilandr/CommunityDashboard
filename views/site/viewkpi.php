@@ -8,11 +8,12 @@ use app\models\Metrics;
 $this->title = 'Community Dashboard';
 
 ?>
+
 <div class="deleteDialog" id="metricdialog-form">
     <span class="glyphicon glyphicon-exclamation-sign"></span>
 <p>Are you sure you want to delete this Metric and all of the contents that belong to it? This action can not be undone!</p>
-
 </div>
+
 <ol class="breadcrumb">
   <li><a href="/web/?r=site/index">Home</a></li>
   <li class="active"> <?php echo $kpi->Title;?> </a></li>
@@ -48,7 +49,7 @@ $this->title = 'Community Dashboard';
                             ?>
                         </p>
                         <p>
-                        Metric Weight: <?php 
+                        Metric Weight: <?php
                             echo $metric->Weight;
                             ?>%
                         </p>
@@ -70,12 +71,18 @@ $this->title = 'Community Dashboard';
                         </p>
                         <p>
                             Percentage:
-                            
+
                         <div class="progress">
                             <div class="progress-bar progress-bar-<?= $metric->progressStatus() ?>" role="progressbar" aria-valuenow="" aria-valuemin="0" aria-valuemax="100" style="width: <?= ($metric->calculateProgressWidth() * 100);?>%;">
                                 <?php $metric->calculateProgressPercent()?>
                             </div>
                         </div>
+
+
+    <div id="container-speed-<?= $metric->ID ?>" style="width: 200px; height:200px;margin: 0 auto;"></div>
+
+
+
                         </p>
                         <ul class="ops">
                             <li>
@@ -96,3 +103,12 @@ $this->title = 'Community Dashboard';
         </div>
     </div>
 </div>
+
+<script>
+
+window.addEventListener("DOMContentLoaded", function() {
+
+    createGauge(<?php $metric->calculateProgressPercent()?>,100,"container-speed-<?= $metric->ID ?>");
+
+});
+</script>

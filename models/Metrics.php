@@ -15,7 +15,7 @@ class Metrics extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
-    */  
+    */
     public static function tableName()
     {
         return 'metric';
@@ -57,10 +57,9 @@ class Metrics extends \yii\db\ActiveRecord
 
     public function calculateProgressPercent() {
         if ($this->Target == 0) {
-            echo "N/A";
-            
+            return 0;
         } else {
-            echo round(($this->Current / $this->Target) * 100) . "%";
+            echo round(($this->Current / $this->Target) * 100);
         }
     }
 
