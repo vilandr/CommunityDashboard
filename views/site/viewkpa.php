@@ -4,7 +4,10 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\web\View;
 /* @var $this yii\web\View */
-$this->title = 'Community Dashboard';
+$this->title = $kpa->Title;
+
+$this->params['breadcrumbs'][] = $this->title;
+
 ?>
 <div class="deleteDialog" id="goaldialog-form">
     <span class="glyphicon glyphicon-exclamation-sign"></span>
@@ -12,18 +15,13 @@ $this->title = 'Community Dashboard';
 
 </div>
 
-<ol class="breadcrumb">
-  <li><a href="/web/?r=site/index">Home</a></li>
-  <li class="active"> <?php echo $kpa->Title;?> </a></li>
-</ol>
-
 <div class="site-index">
 	<div class="jumbotron">
-        
+
 		<h2><?php echo $kpa->Title;?></h2>
-        
+
 		<p><?php echo $kpa->Description;?></p>
-        
+
 	</div>
 	<div class="body-content">
 		<div class="row">
@@ -49,7 +47,7 @@ $this->title = 'Community Dashboard';
                         </p>
                         <p>
 
-                        Goal Weight: <?php 
+                        Goal Weight: <?php
                             if(isset($goal->Weight)) {
                                 echo Html::encode($goal->Weight);
                             } else {

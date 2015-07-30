@@ -4,7 +4,10 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\web\View;
 /* @var $this yii\web\View */
-$this->title = 'Community Dashboard';
+$this->title = $goal->Title;
+
+$this->params['breadcrumbs'][] = ['label' => $kpa->Title, 'url' => Url::to(['site/viewkpa','id'=>$kpa->ID])];
+$this->params['breadcrumbs'][] = $this->title;
 
 ?>
 <div class="deleteDialog" id="kpidialog-form">
@@ -12,10 +15,6 @@ $this->title = 'Community Dashboard';
 <p>Are you sure you want to delete this KPI and all of the contents that belong to it? This action can not be undone!</p>
 
 </div>
-<ol class="breadcrumb">
-  <li><a href="/web/?r=site/index">Home</a></li>
-  <li class="active"> <?php echo $goal->Title;?> </a></li>
-</ol>
 
 <div class="site-index">
 	<div class="jumbotron">
@@ -46,7 +45,7 @@ $this->title = 'Community Dashboard';
                             ?>
                         </p>
                         <p>
-                        KPI Weight: <?php 
+                        KPI Weight: <?php
                             if(isset($kpi->Weight)) {
                                 echo Html::encode($kpi->Weight);
                             } else {

@@ -20,7 +20,6 @@ AppAsset::register($this);
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 
-    <!-- @TODO: move to CSS -->
     <style>
 
         body {

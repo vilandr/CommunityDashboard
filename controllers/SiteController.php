@@ -111,12 +111,10 @@ class SiteController extends Controller
     public function actionViewkpa($id)
     {
 
-
         $kpa = KPA::findOne($id);
         $goals = Goal::find()
         ->where(['kpa_id'=>$id])
         ->all();
-
 
         return $this->render('viewkpa', [
             'kpa'=>$kpa,
@@ -127,16 +125,17 @@ class SiteController extends Controller
     public function actionViewgoal($id)
     {
 
-
         $goal = Goal::findOne($id);
         $kpis = KPI::find()
         ->where(['goal_id'=>$id])
         ->all();
 
+        $kpa = KPA::findOne($goal->KPA_ID);
 
         return $this->render('viewgoal', [
             'goal'=>$goal,
             'kpis'=>$kpis,
+            'kpa' =>$kpa,
             ]);
     }
 
