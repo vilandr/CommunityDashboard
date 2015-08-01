@@ -3,7 +3,7 @@
 namespace app\models;
 
 use Yii;
-
+use yii\db\ActiveRecord;
 /**
  * This is the model class for table "kpa".
  *
@@ -42,6 +42,19 @@ class KPA extends \yii\db\ActiveRecord
             'Title' => 'Title',
             'Description' => 'Description',
         ];
+    }
+    public function overallScore() {
+        
+        $total = 0;
+
+        $goals = Goal::find()
+            ->where(['KPA_ID'=>$this->ID])
+            ->all();
+
+        foreach ($goals as $goal) {
+            $total += ($goal->Weight * $goal->overallScore()) / 100;
+        }
+        return $total;
     }
 
 }

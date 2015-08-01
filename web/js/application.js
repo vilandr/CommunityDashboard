@@ -4,8 +4,11 @@ var deleteDialog;
 $(function() {
 
     var delete_id = 0;
+    var global_kpa_id = 0;
+    var global_goal_id = 0;
     var global_kpi_id = 0;
-
+    
+    
 
     //KPA DELETE
 
@@ -45,7 +48,7 @@ $(function() {
         {
             text: "Delete Goal",
             click: function() {
-                window.location.href = "/web/index.php?r=site%2Fdeletegoal&id=" + delete_id;
+                window.location.href = "/web/index.php?r=site%2Fdeletegoal&goal_id=" + delete_id +"&kpa_id="+ global_kpa_id;
             }
         },
         {
@@ -56,8 +59,9 @@ $(function() {
         }
     ]
     });
-    goalDeleteDialog = function(id) {
-        delete_id = id;
+    goalDeleteDialog = function(goal_id, kpa_id) {
+        delete_id = goal_id;
+        global_kpa_id = kpa_id;
     goaldialog.dialog("open");
     }
     //KPI DELETE
@@ -70,7 +74,7 @@ $(function() {
         {
             text: "Delete KPI",
             click: function() {
-                window.location.href = "/web/index.php?r=site%2Fdeletekpi&id=" + delete_id;
+                window.location.href = "/web/index.php?r=site%2Fdeletekpi&kpi_id=" + delete_id + "&goal_id=" + global_goal_id;
             }
         },
         {
@@ -81,8 +85,9 @@ $(function() {
         }
     ]
     });
-    kpiDeleteDialog = function(id) {
-        delete_id = id;
+    kpiDeleteDialog = function(kpi_id, goal_id) {
+        delete_id = kpi_id;
+        global_goal_id = goal_id;
     kpidialog.dialog("open");
     }
     //METRIC DELETE
@@ -116,7 +121,11 @@ $(function() {
 });
 
 
-    function createGauge( currentData, maxScale,elementID) {
+    function createGauge(currentData, maxScale, elementID) {
+        // var scoreNumber = document.querySelector("div span div span");
+        // if (currentData == 0) {
+        //      scoreNumber.innerHTML = "N/A";
+        // }
 
         var gaugeOptions = {
 
@@ -146,9 +155,9 @@ $(function() {
             // the value axis
             yAxis: {
                 stops: [
-                    [0.1, '#55BF3B'], // green
-                    [0.5, '#DDDF0D'], // yellow
-                    [0.9, '#DF5353'] // red
+                    [0.5, '#DF5353'], // red
+                    [0.75, '#DDDF0D'], // yellow
+                    [0.9, '#55BF3B'] // green
                 ],
                 lineWidth: 0,
                 minorTickInterval: null,
@@ -195,13 +204,13 @@ $(function() {
                         ((Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black') + '">{y}</span><br/>' +
                            '<span style="font-size:12px;color:silver">Score</span></div>'
                 },
-                tooltip: {
+                tooltip: {//could remove
                     valueSuffix: ' km/h'
                 }
             }]
 
         }));
-
+            //could remove
         $('#container-speed').highcharts(),
                 point,
                 newVal,

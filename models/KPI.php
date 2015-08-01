@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "goal".
@@ -42,16 +43,22 @@ class KPI extends \yii\db\ActiveRecord
             'Description' => 'Description',
             'goal_id' => 'Goal_ID',
             'Weight' => 'Weight',
+            
         ];
     }
-    /*public function overallScore() {
+    
+    public function overallScore() {
         
         $total = 0;
-        $addToTotal;
+
+        $metrics = Metrics::find()
+            ->where(['KPI_ID'=>$this->ID])
+            ->all();
+
         foreach ($metrics as $metric) {
-            $addToTotal = ($metric->Weight * $metric->calculateProgressPercent()) / 10000;
-            $total += $addToTotal;
+            $total += $metric->Weight * ($metric->Current/$metric->Target);
         }
-        }*/
+        return $total;
+    }
 
 }

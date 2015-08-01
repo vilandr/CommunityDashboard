@@ -44,22 +44,7 @@ $this->title = 'Community Dashboard';
                             }
                             ?>
                         </span>
-                        <div class="progress">
-                            <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="" aria-valuemin="0" aria-valuemax="100" style="width: 20%;">
-                                20%
-                            </div>
-                        </div>
-                        <ul>
-                            <li>
-                                <b>Goals:</b> 5
-                            </li>
-                            <li>
-                                <b>KPIs:</b> 10
-                            </li>
-                            <li>
-                                <b>Metrics:</b> 15
-                            </li>
-                        </ul>
+                            <div id="container-speed-<?= $kpa->ID ?>" style="width: 200px; height:200px;margin: 0 auto;"></div>
                         <ul class="ops">
                             <li>
                                 <a href="<?= Url::to(['site/viewkpa','id'=>$kpa->ID]) ?>" class="btn btn-info btn-md">View</a>
@@ -74,6 +59,11 @@ $this->title = 'Community Dashboard';
 
                     </div>
                 </div>
+<script>
+    window.addEventListener("DOMContentLoaded", function() {
+    createGauge(<?php echo round($kpa->overallScore()) ?>,100,"container-speed-<?= $kpa->ID ?>");
+});
+</script>
 
             <?php } ?>
         </div>

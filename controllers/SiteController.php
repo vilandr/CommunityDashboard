@@ -116,6 +116,7 @@ class SiteController extends Controller
         ->where(['kpa_id'=>$id])
         ->all();
 
+
         return $this->render('viewkpa', [
             'kpa'=>$kpa,
             'goals'=>$goals,
@@ -129,13 +130,12 @@ class SiteController extends Controller
         $kpis = KPI::find()
         ->where(['goal_id'=>$id])
         ->all();
-
         $kpa = KPA::findOne($goal->KPA_ID);
 
         return $this->render('viewgoal', [
             'goal'=>$goal,
             'kpis'=>$kpis,
-            'kpa' =>$kpa,
+            'kpa'=>$kpa,
             ]);
     }
 
@@ -147,10 +147,14 @@ class SiteController extends Controller
         $metrics = Metrics::find()
         ->where(['kpi_id'=>$id])
         ->all();
+        $goal = Goal::findOne($kpi->Goal_ID);
+        $kpa = KPA::findOne($goal->KPA_ID);
 
         return $this->render('viewkpi', [
             'kpi'=>$kpi,
             'metrics'=>$metrics,
+            'goal'=>$goal,
+            'kpa'=>$kpa,
             ]);
     }
 
@@ -159,9 +163,16 @@ class SiteController extends Controller
 
 
         $metric = Metrics::findOne($id);
+        $kpi = KPI::findOne($metric->KPI_ID);
+        $goal = Goal::findOne($kpi->Goal_ID);
+        $kpa = KPA::findOne($goal->KPA_ID);
+
 
         return $this->render('viewmetric', [
             'metric'=>$metric,
+            'kpi'=>$kpi,
+            'goal'=>$goal,
+            'kpa'=>$kpa,
             ]);
     }
 
@@ -200,6 +211,9 @@ class SiteController extends Controller
 
         $model->KPA_ID=$kpa_id;
 
+        //$kpa = KPA::find()
+          //  ->where(['id'=>$kpa_id]);
+
         if($model->load(Yii::$app->request->post()) && $model->validate()) {
 
             $model->User_ID = Yii::$app->user->identity->ID;
@@ -209,15 +223,16 @@ class SiteController extends Controller
             } else {
                 Yii::$app->session->setFlash('goalCreated', 'There was a problem saving this goal');
             }
-
             return $this->render('addgoal', [
                 'model'=>$model,
                 'added'=>true,
+                //'kpa'=>$kpa,
                 ]);
         }
             return $this->render("addgoal", [
                 'model' => $model,
                 'added' => false,
+                //'kpa' => $kpa,
                 ]);
 
     }
@@ -300,6 +315,7 @@ class SiteController extends Controller
     public function actionEditgoal($id)
     {
         $goal = Goal::findOne($id);
+        $kpa = KPA::findOne($goal->KPA_ID);
 
         if($goal->load(Yii::$app->request->post()) && $goal->validate()) {
 
@@ -316,11 +332,14 @@ class SiteController extends Controller
 
         return $this->render('editgoal', [
             'goal' => $goal,
+            'kpa' => $kpa,
         ]);
     }
     public function actionEditkpi($id)
     {
         $kpi = KPI::findOne($id);
+        $goal = Goal::findOne($kpi->Goal_ID);
+        $kpa = KPA::findOne($goal->KPA_ID);
 
         if($kpi->load(Yii::$app->request->post()) && $kpi->validate()) {
 
@@ -336,12 +355,17 @@ class SiteController extends Controller
 
         return $this->render('editkpi', [
             'kpi' => $kpi,
+            'goal' => $goal,
+            'kpa' => $kpa,
         ]);
     }
 
     public function actionEditmetric($id)
     {
         $metric = Metrics::findOne($id);
+        $kpi = KPI::findOne($metric->KPI_ID);
+        $goal = Goal::findOne($kpi->Goal_ID);
+        $kpa = KPA::findOne($goal->KPA_ID);
 
         if($metric->load(Yii::$app->request->post()) && $metric->validate()) {
 
@@ -357,6 +381,9 @@ class SiteController extends Controller
 
         return $this->render('editmetric', [
             'metric' => $metric,
+            'kpi' => $kpi,
+            'goal' => $goal,
+            'kpa' => $kpa,
         ]);
     }
 
@@ -372,27 +399,27 @@ class SiteController extends Controller
 
         Yii::$app->response->redirect(array('/site/index'));
     }
-    public function actionDeletegoal($id)
+    public function actionDeletegoal($goal_id, $kpa_id)
     {
-        $goal = Goal::findOne($id);
+        $goal = Goal::findOne($goal_id);
 
         //@todo: make sure to check for a valid object/model
         if(isset($goal)) {
-            $goal->delete($id);
+            $goal->delete($goal_id);
         }
 
-        Yii::$app->response->redirect(array('/site/viewkpa'));
+        Yii::$app->response->redirect(array('/site/viewkpa', 'id'=>$kpa_id));
     }
-    public function actionDeletekpi($id)
+    public function actionDeletekpi($kpi_id, $goal_id)
     {
-        $kpi = KPI::findOne($id);
+        $kpi = KPI::findOne($kpi_id);
 
         //@todo: make sure to check for a valid object/model
         if(isset($kpi)) {
-            $kpi->delete($id);
+            $kpi->delete($kpi_id);
         }
 
-        Yii::$app->response->redirect(array('/site/viewgoal'));
+        Yii::$app->response->redirect(array('/site/viewgoal', 'id'=>$goal_id));
     }
     public function actionDeletemetric($metric_id, $kpi_id)
     {

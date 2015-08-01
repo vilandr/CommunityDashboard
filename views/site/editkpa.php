@@ -6,6 +6,9 @@ use yii\bootstrap\ActiveForm;
 /* @var $this yii\web\View */
 /* @var $form yii\bootstrap\ActiveForm */
 /* @var $model app\models\KPA */
+$this->title = $kpa->Title;
+
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <h2>Edit <?php echo $kpa->Title;?></h2>

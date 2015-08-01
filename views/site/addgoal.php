@@ -1,14 +1,15 @@
 <?php
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
-
+use yii\web\View;
+use yii\helpers\Url;
 /* @var $this yii\web\View */
 /* @var $form yii\bootstrap\ActiveForm */
 /* @var $model app\models\Goal */
 
 $this->title = 'Add Goal';
+//$this->params['breadcrumbs'][] = ['label' => $kpa->Title, 'url' => Url::to(['site/viewkpa','id'=>$kpa->ID])];
 $this->params['breadcrumbs'][] = $this->title;
-
 ?>
 <div class="">
     <h1><?= Html::encode($this->title) ?></h1>

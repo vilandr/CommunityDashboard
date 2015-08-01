@@ -5,8 +5,10 @@ use yii\helpers\Url;
 use yii\web\View;
 use app\models\Metrics;
 /* @var $this yii\web\View */
-$this->title = 'Community Dashboard';
-
+$this->title = $kpi->Title;
+$this->params['breadcrumbs'][] = ['label' => $kpa->Title, 'url' => Url::to(['site/viewkpa','id'=>$kpa->ID])];
+$this->params['breadcrumbs'][] = ['label' => $goal->Title, 'url' => Url::to(['site/viewgoal','id'=>$goal->ID])];
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <div class="deleteDialog" id="metricdialog-form">
@@ -14,17 +16,12 @@ $this->title = 'Community Dashboard';
 <p>Are you sure you want to delete this Metric and all of the contents that belong to it? This action can not be undone!</p>
 </div>
 
-<ol class="breadcrumb">
-  <li><a href="/web/?r=site/index">Home</a></li>
-  <li class="active"> <?php echo $kpi->Title;?> </a></li>
-</ol>
-
 <div class="site-index">
     <div class="jumbotron">
         <h3><?php echo $kpi->Title;?></h4>
         <p><?php echo $kpi->Description;?></p>
         <p>KPI Weight: <?php echo $kpi->Weight;?>%</p>
-        <p>KPI Overall Score: </p>
+        <p>KPI Overall Score: <?php echo round($kpi->overallScore()) ?></p>
     </div>
     <div class="body-content">
         <div class="row">
@@ -70,19 +67,7 @@ $this->title = 'Community Dashboard';
                             ?>
                         </p>
                         <p>
-                            Percentage:
-
-                        <div class="progress">
-                            <div class="progress-bar progress-bar-<?= $metric->progressStatus() ?>" role="progressbar" aria-valuenow="" aria-valuemin="0" aria-valuemax="100" style="width: <?= ($metric->calculateProgressWidth() * 100);?>%;">
-                                <?php $metric->calculateProgressPercent()?>
-                            </div>
-                        </div>
-
-
-    <div id="container-speed-<?= $metric->ID ?>" style="width: 200px; height:200px;margin: 0 auto;"></div>
-
-
-
+                            <div id="container-speed-<?= $metric->ID ?>" style="width: 200px; height:200px;margin: 0 auto;"></div>
                         </p>
                         <ul class="ops">
                             <li>
@@ -92,23 +77,19 @@ $this->title = 'Community Dashboard';
                                 <a href="<?= Url::to(['site/editmetric','id'=>$metric->ID]) ?>" class="btn btn-info btn-md">Edit</a>
                             </li>
                             <li>
-                                <button id="deletemetric" class="btn btn-danger btn-xs" type="button" onclick="metricDeleteDialog(<?= $metric->ID; ?>,<?= $kpi->ID ?>)">Delete</button>
+                                <button id="deletemetric" class="btn btn-danger btn-xs" type="button" onclick="metricDeleteDialog(<?= $metric->ID; ?>,<?= $kpi->ID; ?>)">Delete</button>
                             </li>
                         </ul>
 
                     </div>
                 </div>
-
+<script>
+window.addEventListener("DOMContentLoaded", function() {
+    createGauge(<?php $metric->calculateProgressPercent() ?>,100,"container-speed-<?= $metric->ID ?>");
+});
+</script>
             <?php } ?>
         </div>
     </div>
 </div>
 
-<script>
-
-window.addEventListener("DOMContentLoaded", function() {
-
-    createGauge(<?php $metric->calculateProgressPercent()?>,100,"container-speed-<?= $metric->ID ?>");
-
-});
-</script>
